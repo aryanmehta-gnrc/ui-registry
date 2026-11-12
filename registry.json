@@ -1,25 +1,73 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "dse",
-  "homepage": "https://localhost:5173/",
+  "name": "ui-registry",
+  "homepage": "https://github.com/aryanmehta-gnrc/ui-registry",
   "items": [
     {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "DSE button.",
-      "dependencies": ["radix-ui", "class-variance-authority"],
-      "registryDependencies": ["utils"],
-      "files": [{ "path": "src/components/ui/button/index.ts", "type": "registry:ui" }]
+      "dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
+      "files": [{ "path": "src/components/ui/button.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/components/ui/card.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "dependencies": ["@base-ui/react", "cn"],
+      "files": [{ "path": "src/components/ui/input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/components/ui/label.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "dependencies": ["@base-ui/react", "cn"],
+      "files": [{ "path": "src/components/ui/separator.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "dependencies": ["class-variance-authority", "cn"],
+      "registryDependencies": [
+        "aryanmehta-gnrc/ui-registry/label",
+        "aryanmehta-gnrc/ui-registry/separator"
+      ],
+      "files": [{ "path": "src/components/ui/field.tsx", "type": "registry:ui" }]
     },
     {
       "name": "auth-card",
       "type": "registry:block",
       "title": "Auth Card",
-      "description": "A card component for authentication forms.",
-      "dependencies": ["radix-ui", "class-variance-authority"],
-      "registryDependencies": ["utils", "button", "input"],
-      "files": [{ "path": "src/components/blocks/auth/auth-card.tsx", "type": "registry:block" }]
+      "description": "Identifier-first sign-in card. Presentational: the app handles authentication.",
+      "dependencies": ["cn"],
+      "registryDependencies": [
+        "aryanmehta-gnrc/ui-registry/button",
+        "aryanmehta-gnrc/ui-registry/card",
+        "aryanmehta-gnrc/ui-registry/field",
+        "aryanmehta-gnrc/ui-registry/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/auth/auth-card.tsx",
+          "type": "registry:component",
+          "target": "@components/auth/auth-card.tsx"
+        }
+      ]
     }
   ]
 }

@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./card"
-import { Button } from "../button/button"
+import { Button } from "./button"
 
 const meta = {
   title: "Components/Card",

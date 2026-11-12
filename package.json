@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "registry:build": "shadcn build",
+    "registry:validate": "shadcn registry validate",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

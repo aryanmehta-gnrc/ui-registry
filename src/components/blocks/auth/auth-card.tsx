@@ -1,8 +1,8 @@
-import { Button } from '../../ui/button/button'
-import { Card, CardDescription, CardHeader, CardTitle } from '../../ui/card/card'
-import { Field, FieldGroup } from '../../ui/field/field'
-import { Label } from '../../ui/field/label'
-import { Input } from '../../ui/input/input'
+import { Button } from "../../ui/button"
+import { Card, CardDescription, CardHeader, CardTitle } from "../../ui/card"
+import { Field, FieldGroup } from "../../ui/field"
+import { Input } from "../../ui/input"
+import { Label } from "../../ui/label"
 
 function AuthCard() {
   return (
