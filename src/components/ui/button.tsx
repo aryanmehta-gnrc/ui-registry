@@ -45,12 +45,11 @@ function Button({
   size = "default",
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
-  const handleFunction = () => console.log("Button clicked!"); // Example function to handle button click
+
   return (
     <ButtonPrimitive
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      onClick={handleFunction} // Attach the click handler
       {...props}
     />
   )
