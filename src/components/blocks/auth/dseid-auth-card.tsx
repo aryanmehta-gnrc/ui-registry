@@ -10,7 +10,7 @@ import { cn } from "cn"
 const linkClass =
   "rounded-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
 
-function AuthCard() {
+function DSEiDAuthCard() {
   const usernameId = React.useId()
 
   return (
@@ -74,4 +74,4 @@ function AuthCard() {
   )
 }
 
-export { AuthCard };
+export { DSEiDAuthCard };

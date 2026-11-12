@@ -50,10 +50,10 @@
       "files": [{ "path": "src/components/ui/field.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "auth-card",
+      "name": "dseid-auth-card",
       "type": "registry:block",
-      "title": "Auth Card",
-      "description": "Identifier-first sign-in card. Presentational: the app handles authentication.",
+      "title": "DSEiD Auth Card",
+      "description": "DSEiD Auth Card for Auth0.",
       "dependencies": ["cn"],
       "registryDependencies": [
         "aryanmehta-gnrc/ui-registry/button",
@@ -63,9 +63,9 @@
       ],
       "files": [
         {
-          "path": "src/components/blocks/auth/auth-card.tsx",
+          "path": "src/components/blocks/auth/dseid-auth-card.tsx",
           "type": "registry:component",
-          "target": "@components/auth/auth-card.tsx"
+          "target": "@components/auth/dseid-auth-card.tsx"
         }
       ]
     }

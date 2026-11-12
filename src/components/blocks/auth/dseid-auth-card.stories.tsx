@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-
-import { AuthCard } from "./auth-card"
+import { DSEiDAuthCard } from "./dseid-auth-card"
 
 
 const meta = {
   title: "Blocks/Auth Card",
-  component: AuthCard,
-} satisfies Meta<typeof AuthCard>
+  component: DSEiDAuthCard,
+} satisfies Meta<typeof DSEiDAuthCard>
 
 export default meta
 type Story = StoryObj<typeof meta>
