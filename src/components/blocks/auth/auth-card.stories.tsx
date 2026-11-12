@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
-import AuthCard from './auth-card';
+import { AuthCard } from './auth-card';
 
 
 

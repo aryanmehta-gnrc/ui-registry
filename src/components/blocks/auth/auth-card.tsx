@@ -1,8 +1,8 @@
-import { Button } from "../../ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "../../ui/card"
-import { Field, FieldGroup } from "../../ui/field"
-import { Input } from "../../ui/input"
-import { Label } from "../../ui/label"
+import { Button } from "@/components/ui/button"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Field, FieldGroup } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 function AuthCard() {
   return (
@@ -27,4 +27,4 @@ function AuthCard() {
   )
 }
 
-export default AuthCard
+export { AuthCard }
