@@ -16,7 +16,10 @@
       "name": "auth-card",
       "type": "registry:block",
       "title": "Auth Card",
-      "description": "A card component for authentication forms."
+      "description": "A card component for authentication forms.",
+      "dependencies": ["radix-ui", "class-variance-authority"],
+      "registryDependencies": ["utils", "button", "input"],
+      "files": [{ "path": "src/components/blocks/auth/auth-card.tsx", "type": "registry:block" }]
     }
   ]
 }
