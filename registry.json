@@ -10,7 +10,13 @@
       "description": "DSE button.",
       "dependencies": ["radix-ui", "class-variance-authority"],
       "registryDependencies": ["utils"],
-      "files": [{ "path": "src/components/ui/button.tsx", "type": "registry:ui" }]
+      "files": [{ "path": "src/components/ui/button/index.ts", "type": "registry:ui" }]
+    },
+    {
+      "name": "auth-card",
+      "type": "registry:block",
+      "title": "Auth Card",
+      "description": "A card component for authentication forms."
     }
   ]
 }

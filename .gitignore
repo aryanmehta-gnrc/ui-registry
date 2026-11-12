@@ -7,10 +7,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies and builds
 node_modules
 dist
 dist-ssr
 *.local
+
+# Environment (tokens must never be committed)
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -23,5 +29,15 @@ dist-ssr
 *.sln
 *.sw?
 
+# Storybook
 *storybook.log
 storybook-static
+
+# Registry build output
+public/r
+
+# Tests
+coverage
+test-results
+playwright-report
+__screenshots__
