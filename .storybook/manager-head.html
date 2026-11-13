@@ -1,0 +1,36 @@
+<style>
+  /* ── Sidebar items ─────────────────────────────────────────── */
+
+  /* Icons: neutral grey instead of Storybook's orange/cyan/blue */
+  .sidebar-item svg {
+    color: #a1a1a1 !important;
+  }
+
+  /* Hover (not selected): slightly lighter row, white icon */
+  .sidebar-item:not([data-selected="true"]):hover {
+    background: #333333 !important;
+  }
+  .sidebar-item:not([data-selected="true"]):hover svg {
+    color: #fafafa !important;
+  }
+
+  /* Selected: darker row with a white bar on the left, white text */
+  .sidebar-item[data-selected="true"],
+  .sidebar-item[data-selected="true"]:hover {
+    background: #404040 !important;
+    box-shadow: inset 3px 0 0 #fafafa !important;
+    color: #fafafa !important;
+    font-weight: 600 !important;
+  }
+  .sidebar-item[data-selected="true"] a,
+  .sidebar-item[data-selected="true"] svg {
+    color: #fafafa !important;
+  }
+
+  /* Context-menu (+) button: no grey glow or background */
+  .sidebar-item [data-testid="context-menu"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: inherit !important;
+  }
+</style>
