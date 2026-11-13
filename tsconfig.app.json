@@ -8,7 +8,9 @@
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/registry/*": ["./registry/*"],
+      "@/lib/*": ["./registry/lib/*"],
+      "@/hooks/*": ["./registry/hooks/*"]
     },
 
     /* Bundler mode */
@@ -25,5 +27,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["registry", "docs", ".storybook/**/*", "tests"]
 }

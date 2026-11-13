@@ -6,7 +6,9 @@
   ],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/registry/*": ["./registry/*"],
+      "@/lib/*": ["./registry/lib/*"],
+      "@/hooks/*": ["./registry/hooks/*"]
     }
   }
 }
