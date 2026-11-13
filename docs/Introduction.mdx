@@ -1,0 +1,131 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# DSE UI
+
+A registry of React components for DSE web applications, built on [Base UI](https://base-ui.com) and Tailwind CSS v4 and distributed with the [shadcn CLI](https://ui.shadcn.com/docs/registry).
+
+> **Status: experimental.** Components, names and documentation may change without notice.
+
+## How it works
+
+This isn't an npm package. When you add a component, the shadcn CLI **copies its source code into your project**:
+
+```bash
+npx shadcn@latest add aryanmehta-gnrc/ui-registry/button
+```
+
+The copy belongs to your project from then on. That means:
+
+- You can read and change everything; nothing is hidden in `node_modules`.
+- Updates don't arrive automatically. Re-install a component to pick up fixes (see **Getting Started › Updating**).
+- The CLI also installs the npm packages and other registry components it depends on.
+
+## What's in this Storybook
+
+<table>
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>What you'll find</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Getting Started</strong>
+      </td>
+      <td>Installing components into a project, and keeping them up to date</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Foundations</strong>
+      </td>
+      <td>
+        Typography, spacing, icons, colour, and the accessibility standard every
+        component meets
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Components</strong>
+      </td>
+      <td>
+        Every component, grouped by purpose: Actions, Forms, Data Display,
+        Feedback, Overlays, Navigation, Layout, Charts
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Blocks</strong>
+      </td>
+      <td>
+        Ready-made pieces built from several components, such as an app shell
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Patterns</strong>
+      </td>
+      <td>
+        How components work together: forms, data tables, loading and errors
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Pages</strong>
+      </td>
+      <td>Full example screens</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Engineering</strong>
+      </td>
+      <td>For contributors: roadmap, testing, conventions</td>
+    </tr>
+  </tbody>
+</table>
+
+Each component has a **Docs** page (usage guidance, accessibility notes, the props table and every example) and individual **stories** you can open and adjust with the controls.
+
+## Principles
+
+1. **Accessible by default.** Every component targets WCAG 2.2 AA and is tested for it automatically.
+2. **Theme tokens, never hard-coded colours.** Components follow whichever theme your project uses.
+3. **Works in any React setup.** Vite, Next.js, and Symfony through React islands.
+4. **Documented next to the code.** Each component's docs live beside its source, so they change together.
+
+## Supported projects
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Supported</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Vite + React</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Next.js (App Router or Pages Router)</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Symfony with Twig</td>
+      <td>Yes, as React islands mounted with Symfony UX React</td>
+    </tr>
+    <tr>
+      <td>Twig-only pages (no React)</td>
+      <td>Styling only</td>
+    </tr>
+  </tbody>
+</table>
+
+## Getting help
+
+- Questions and requests: open an issue in the [ui-registry repository](https://github.com/aryanmehta-gnrc/ui-registry).
+- Found an accessibility problem? Report it as a bug with the label `accessibility`.

@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/registry/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/registry/ui/card"
+import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@/registry/ui/field"
+import { Input } from "@/registry/ui/input"
 import { cn } from "cn"
 
 

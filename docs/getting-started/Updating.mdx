@@ -1,0 +1,56 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta />
+
+# Updating
+
+Installed components are copies in your project, so **they don't update themselves**. To pick up fixes and improvements, re-install the component.
+
+## See what changed
+
+Compare the registry's version with your copy, without changing anything:
+
+```bash
+npx shadcn@latest add aryanmehta-gnrc/ui-registry/button --diff
+```
+
+Check the changelog for the component too, so you know whether the change affects you.
+
+## Update a component
+
+```bash
+npx shadcn@latest add aryanmehta-gnrc/ui-registry/button --overwrite
+```
+
+This **replaces your copy**, including any edits you made to it. Then review the change like any other:
+
+```bash
+git diff
+```
+
+Updating a component also re-installs the registry components it depends on, so check their changes too.
+
+## Update to a specific version
+
+```bash
+npx shadcn@latest add aryanmehta-gnrc/ui-registry/button#v0.2.0 --overwrite
+```
+
+## Keep updates painless
+
+**Don't edit installed components.** Wrap them or pass props instead, so `--overwrite` is always safe:
+
+```tsx
+// components/save-button.tsx: your own file
+import { Button } from "@/components/ui/button";
+
+export function SaveButton() {
+  return <Button variant="default">Save changes</Button>;
+}
+```
+
+If a component can't do what you need, ask for a new prop or variant in the registry rather than changing your copy.
+
+## Breaking changes
+
+A **major version** (for example `v1.x` to `v2.0`) means something may break: a renamed prop, a removed variant, a changed default. The changelog lists what changed and how to update. Minor and patch versions are safe to update to.

@@ -7,10 +7,13 @@ A [shadcn registry](https://ui.shadcn.com/docs/registry) of React components bui
 ## Using a component
 
 **Requirements**
+
 - A React project with Tailwind CSS v4 and shadcn initialised (`npx shadcn@latest init -b base`).
 - Read access to this repository.
+- Node.js 26 (see `.nvmrc`). Minimum 22.18.
 
 **1. Sign in.** This repository is private. Use either of these:
+
 - **A token:** create a fine-grained token with access to this repository only and **Contents: Read-only**, then:
   ```bash
   export GH_TOKEN=github_pat_xxxxxxxx
@@ -21,11 +24,13 @@ A [shadcn registry](https://ui.shadcn.com/docs/registry) of React components bui
   ```
 
 **2. Install a component:**
+
 ```bash
 npx shadcn@latest add aryanmehta-gnrc/ui-registry/button
 ```
 
 **3. Pin a version** (optional):
+
 ```bash
 npx shadcn@latest add aryanmehta-gnrc/ui-registry/button#v0.1.0
 ```
@@ -64,9 +69,12 @@ npm run registry:validate    # checks registry.json
      "type": "registry:ui",
      "dependencies": ["@base-ui/react", "class-variance-authority"],
      "registryDependencies": ["utils"],
-     "files": [{ "path": "src/components/ui/button.tsx", "type": "registry:ui" }]
+     "files": [
+       { "path": "src/components/ui/button.tsx", "type": "registry:ui" }
+     ]
    }
    ```
+
    - **`dependencies`:** list every npm package the file imports.
    - **`registryDependencies`:** refer to this registry's own items in full, e.g. `aryanmehta-gnrc/ui-registry/input`.
 5. Run `npm run registry:validate`, then push. Tag releases as `vX.Y.Z`.

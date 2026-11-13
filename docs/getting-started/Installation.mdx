@@ -1,0 +1,135 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta />
+
+# Installation
+
+Add components to a React project with the shadcn CLI. The CLI copies each component's source into your project, installs the npm packages it needs, and adds any other registry components it depends on.
+
+## 1. Requirements
+
+- **React 19** and **Tailwind CSS v4**
+- **Node.js 22.18 or later**
+- **shadcn initialised** in the project, with the Base UI base:
+
+```bash
+npx shadcn@latest init -b base
+```
+
+When asked, choose your framework template (Vite or Next.js). For Symfony, see **Symfony projects** below.
+
+## 2. Sign in to GitHub
+
+The registry is a private GitHub repository, so the CLI needs read access. Use **one** of these.
+
+**A token.** Create a fine-grained personal access token on GitHub with access to the `ui-registry` repository only and **Contents: Read-only**. Then, in the same terminal:
+
+```bash
+export GH_TOKEN=github_pat_xxxxxxxx
+```
+
+**The GitHub CLI:**
+
+```bash
+gh auth login
+```
+
+Treat the token like a password: never commit it, paste it into chat, or put it in `components.json`.
+
+## 3. Add a component
+
+```bash
+npx shadcn@latest add aryanmehta-gnrc/ui-registry/button
+```
+
+Add several at once:
+
+```bash
+npx shadcn@latest add aryanmehta-gnrc/ui-registry/button aryanmehta-gnrc/ui-registry/card
+```
+
+Components go into your project's `components/ui/` folder (or wherever the `ui` alias in your `components.json` points), and their imports are rewritten to match your project.
+
+## 4. Use it
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function SaveBar() {
+  return <Button>Save changes</Button>;
+}
+```
+
+Each component's **Docs** page shows its install command, import line, props and examples.
+
+## Pin a version
+
+Add a release tag after `#` to install a fixed version:
+
+```bash
+npx shadcn@latest add aryanmehta-gnrc/ui-registry/button#v0.1.0
+```
+
+A pin applies only to the component you name. Components it depends on are installed from the latest version unless you pin them too.
+
+## Next.js projects
+
+- Interactive components start with `"use client"`. The CLI keeps it when `components.json` has `"rsc": true`.
+- Don't pass ordinary functions (such as `onClick`) from a Server Component. Wrap the component in your own Client Component, or use a link or a Server Action.
+
+## Symfony projects
+
+Components run as **React islands** inside Twig pages, mounted with [Symfony UX React](https://symfony.com/bundles/ux-react).
+
+1. Set up a Node build (Symfony Reprise, or your existing Vite or Webpack Encore setup), React, TypeScript and Tailwind CSS v4.
+2. Create `components.json` by hand (shadcn has no Symfony template), with `"rsc": false` and aliases pointing at `assets/react/`.
+3. Add components with the command above.
+4. Wrap each one in a controller with a **default export** in `assets/react/controllers/`, then mount it from Twig:
+
+```twig
+<div {{ react_component('SaveButton', { label: 'Save' }) }}></div>
+```
+
+Each island is a separate React app: islands can't share React context, and props from Twig must be plain data.
+
+## Troubleshooting
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What to check</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"Not found" or "request failed"</td>
+      <td>
+        Run <code>gh auth status</code>, or check <code>GH_TOKEN</code> is set
+        in this terminal. Private repositories report "not found" when access is
+        missing.
+      </td>
+    </tr>
+    <tr>
+      <td>Certificate or connection errors</td>
+      <td>
+        Corporate network: try <code>NODE_OPTIONS=--use-system-ca</code> (Node
+        22.15+), or ask IT for the proxy settings.
+      </td>
+    </tr>
+    <tr>
+      <td>An import can't be found after install</td>
+      <td>
+        Check the aliases in your <code>components.json</code> and{" "}
+        <code>tsconfig.json</code> match.
+      </td>
+    </tr>
+    <tr>
+      <td>A component looks unstyled</td>
+      <td>
+        Check your CSS imports Tailwind and <code>shadcn/tailwind.css</code>,
+        and that the theme tokens from <code>shadcn init</code> are present.
+      </td>
+    </tr>
+  </tbody>
+</table>

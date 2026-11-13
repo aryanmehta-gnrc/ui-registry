@@ -1,0 +1,204 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta />
+
+# Accessibility
+
+Every component in this registry targets **WCAG 2.2 level AA**: usable with a keyboard, understandable with a screen reader, and readable for people with low vision or colour blindness.
+
+> This page describes how the components are built and tested. It isn't a conformance claim for any product. Each product team is responsible for testing its own pages, content and flows.
+
+## What every component guarantees
+
+<table>
+  <thead>
+    <tr>
+      <th>Area</th>
+      <th>What it means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Keyboard</strong>
+      </td>
+      <td>
+        Everything works without a mouse: Tab, Shift+Tab, Enter, Space, Escape
+        and arrow keys
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Focus</strong>
+      </td>
+      <td>
+        A clearly visible focus ring (3:1 contrast or more), and focus is never
+        lost or trapped by accident
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Names and roles</strong>
+      </td>
+      <td>
+        Every control has an accessible name and the correct role, so screen
+        readers announce it properly
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Text contrast</strong>
+      </td>
+      <td>4.5:1 for normal text, 3:1 for large text</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Non-text contrast</strong>
+      </td>
+      <td>
+        3:1 for control boundaries, focus rings and the parts of icons and
+        charts needed to understand them
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Colour</strong>
+      </td>
+      <td>
+        Never the only way information is shown: states always have text or an
+        icon too
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Motion</strong>
+      </td>
+      <td>Animations respect the "reduce motion" setting</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Overlays</strong>
+      </td>
+      <td>
+        Dialogs, menus and popovers move focus inside when opened, close with
+        Escape, and return focus when closed
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Changes from shadcn's defaults
+
+Testing found that some of shadcn's default colours and styles fall short of AA. This registry changes them:
+
+<table>
+  <thead>
+    <tr>
+      <th>Change</th>
+      <th>Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Focus rings drawn at full strength (<code>ring-ring</code>, not{" "}
+        <code>ring-ring/50</code>)
+      </td>
+      <td>The 50% ring was too faint to see</td>
+    </tr>
+    <tr>
+      <td>
+        Light-mode <code>--ring</code> darkened to <code>oklch(0.556 0 0)</code>
+      </td>
+      <td>The default grey was 2.59:1 against white; now 4.73:1</td>
+    </tr>
+    <tr>
+      <td>
+        Light-mode <code>--muted-foreground</code> darkened to{" "}
+        <code>oklch(0.53 0 0)</code>
+      </td>
+      <td>Grey text on grey backgrounds was 4.34:1</td>
+    </tr>
+    <tr>
+      <td>
+        Light-mode <code>--destructive</code> changed to{" "}
+        <code>oklch(0.51 0.21 27.325)</code>
+      </td>
+      <td>Red text on the pale red tint was 4.05:1</td>
+    </tr>
+  </tbody>
+</table>
+
+If your project uses its own theme, check these pairs still pass with your colours.
+
+## How it's tested
+
+<table>
+  <thead>
+    <tr>
+      <th>Check</th>
+      <th>When it runs</th>
+      <th>What it catches</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Storybook Accessibility panel</strong>
+      </td>
+      <td>Live, while developing</td>
+      <td>axe-core checks on the open story</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Story tests</strong>
+      </td>
+      <td>
+        Storybook test panel, <code>npm run test:stories</code>
+      </td>
+      <td>The same checks; set to fail on any violation</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Accessibility sweep</strong>
+      </td>
+      <td>
+        <code>npm run test:a11y</code>, and in CI
+      </td>
+      <td>axe-core on every story of every component</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Keyboard tests</strong>
+      </td>
+      <td>
+        <code>npm run test:e2e</code>, and in CI
+      </td>
+      <td>
+        Tab order, keyboard activation, focus management, accessible names
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Automated tools find roughly a third of accessibility problems. The rest needs people:
+
+- **Keyboard check:** use the component with the keyboard only. Is the order logical? Is focus always visible?
+- **Screen reader check:** try it with NVDA (Windows) or VoiceOver (macOS). Is everything announced clearly and in a sensible order?
+- **Zoom check:** at 200% browser zoom and at phone width, does anything overlap or get cut off?
+
+## Using components accessibly
+
+Components can only do so much; how they're used matters as much.
+
+- **Label everything.** Every input needs a visible label; icon-only buttons need an `aria-label`.
+- **Write clear text.** Button labels say what happens ("Save changes"); error messages say how to fix the problem.
+- **Use headings in order** on your pages, so screen-reader users can navigate by them.
+- **Don't override focus styles** or remove the focus ring.
+- **Use the right component for the job:** a link to navigate, a button to act.
+
+Each component's Docs page has its own **Accessibility** section with specific guidance.
+
+## Reporting a problem
+
+Open an issue in the ui-registry repository with the label `accessibility`. Include the component, the story, what you expected, and what happened (with the browser and assistive technology used).

@@ -1,0 +1,240 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta />
+
+# Testing
+
+Every component is tested in four ways. Stories are the starting point: they're the examples in the docs **and** the test cases.
+
+<table>
+  <thead>
+    <tr>
+      <th>Test</th>
+      <th>Tool</th>
+      <th>Where</th>
+      <th>Checks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Story tests</strong>
+      </td>
+      <td>Storybook + Vitest</td>
+      <td>
+        next to each component, <code>*.stories.tsx</code>
+      </td>
+      <td>
+        Every story renders; accessibility checks pass; <code>play</code>{" "}
+        interactions work
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Accessibility sweep</strong>
+      </td>
+      <td>Playwright + axe-core</td>
+      <td>
+        <code>tests/accessibility/stories.spec.ts</code>
+      </td>
+      <td>WCAG 2.2 AA automated checks on every story</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>End-to-end tests</strong>
+      </td>
+      <td>Playwright</td>
+      <td>
+        <code>tests/e2e/&lt;component&gt;.spec.ts</code>
+      </td>
+      <td>Keyboard use, focus, accessible names, behaviour a user relies on</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Registry checks</strong>
+      </td>
+      <td>Node script</td>
+      <td>
+        <code>scripts/check-registry.ts</code>
+      </td>
+      <td>
+        Dependencies match imports; stories, docs, JSDoc and e2e tests exist
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Commands
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Runs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>npm run test:stories</code>
+      </td>
+      <td>Story tests (Vitest)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>npm run test:a11y</code>
+      </td>
+      <td>Accessibility sweep, every story</td>
+    </tr>
+    <tr>
+      <td>
+        <code>npm run test:e2e</code>
+      </td>
+      <td>End-to-end tests</td>
+    </tr>
+    <tr>
+      <td>
+        <code>npm run test:playwright</code>
+      </td>
+      <td>Accessibility sweep and end-to-end tests together</td>
+    </tr>
+    <tr>
+      <td>
+        <code>npm run registry:check</code>
+      </td>
+      <td>Registry checks (strict)</td>
+    </tr>
+    <tr>
+      <td>
+        <code>npm run check</code>
+      </td>
+      <td>Lint, type-check, registry validation and registry checks</td>
+    </tr>
+  </tbody>
+</table>
+
+Playwright starts Storybook by itself, or reuses one already running on port 6007.
+
+## Testing one component
+
+While working on a component, run only its tests. `-g` matches the Storybook title:
+
+```bash
+npx playwright test -g "Components/Actions/Button"   # its accessibility sweep and e2e tests
+npx playwright test -g "Button › IconOnly"           # one story
+```
+
+Faster still: open the component in Storybook. The **Accessibility** panel updates as you edit, and the test widget in the sidebar runs its story tests.
+
+## Writing an end-to-end test
+
+Add one for every **interactive** component, and mark the component `"meta": { "interactive": true }` in `registry.json` so the registry check requires it.
+
+```ts
+// tests/e2e/dialog.spec.ts
+import { expect, test } from "@playwright/test";
+
+import { gotoStory, storyId } from "../fixtures/storybook";
+
+const story = (name: string) => storyId("Components/Overlays/Dialog", name);
+
+test.describe("Dialog", () => {
+  test("opens, keeps focus inside, and closes with Escape", async ({
+    page,
+  }) => {
+    await gotoStory(page, story("Default"));
+    const trigger = page.getByRole("button", { name: "Open" });
+
+    await trigger.click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toBeHidden();
+    await expect(trigger).toBeFocused();
+  });
+});
+```
+
+**Guidelines**
+
+- **Find elements the way users do:** `getByRole`, `getByLabel`, `getByText`. Never by CSS class. If you can't find an element by role or label, that's usually an accessibility bug.
+- **Test the keyboard path:** Tab to it, activate with Enter or Space, move with arrow keys, close with Escape, check where focus goes.
+- **One behaviour per test**, named as a sentence: "a disabled button can't be focused".
+- **Use stories as fixtures.** If a test needs a particular state, add a story for it; that state then gets documented and swept for accessibility too.
+
+## The accessibility sweep
+
+The sweep reads every `*.stories.tsx` file and runs axe-core on each story, so new stories are covered without writing anything.
+
+To skip a story (for example one that deliberately shows a broken state), tag it:
+
+```tsx
+export const BrokenExample: Story = {
+  tags: ["skip-a11y"],
+};
+```
+
+Skipping should be rare. Explain why in a comment above the story.
+
+## Before opening a pull request
+
+```bash
+npm run check
+npx playwright test -g "<YourComponent>"
+```
+
+CI runs everything: `npm run check`, `npm run test:stories` and `npx playwright test` across all components, so a change to something shared (a token, a base component) can't break another component unnoticed.
+
+## When a test fails
+
+<table>
+  <thead>
+    <tr>
+      <th>Failure</th>
+      <th>Usually means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Accessibility sweep: <code>color-contrast</code>
+      </td>
+      <td>
+        A colour pair is below 4.5:1 (text) or 3:1 (non-text). Fix the token or
+        the class, not the test.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Accessibility sweep: <code>button-name</code>, <code>label</code>,{" "}
+        <code>link-name</code>
+      </td>
+      <td>
+        A control has no accessible name. Add a label or <code>aria-label</code>
+        .
+      </td>
+    </tr>
+    <tr>
+      <td>E2E: element not found</td>
+      <td>
+        The role or name changed, or the story ID changed (titles are part of
+        the ID).
+      </td>
+    </tr>
+    <tr>
+      <td>
+        E2E: <code>toBeFocused</code> fails
+      </td>
+      <td>
+        Focus went somewhere unexpected; check the component's focus management.
+      </td>
+    </tr>
+    <tr>
+      <td>Story test fails but the sweep passes</td>
+      <td>
+        A <code>play</code> function or a render error; open the story in
+        Storybook to see it.
+      </td>
+    </tr>
+  </tbody>
+</table>
