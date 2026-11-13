@@ -1,0 +1,83 @@
+import {
+  Canvas,
+  Controls,
+  Meta,
+  Source,
+  Stories,
+  Title,
+} from "@storybook/addon-docs/blocks";
+
+import * as ButtonStories from "./button.stories";
+
+<Meta of={ButtonStories} name="Docs" />
+
+<Title />
+
+Triggers an action, such as saving, submitting or opening a dialog.
+
+<Canvas of={ButtonStories.Default} />
+
+<Controls />
+
+## Install
+
+<Source
+  language="bash"
+  code="npx shadcn@latest add aryanmehta-gnrc/ui-registry/button"
+/>
+
+<Source
+  language="tsx"
+  code={`import { Button } from "@/components/ui/button"`}
+/>
+
+## Variants
+
+| Variant       | Use for                                                   |
+| ------------- | --------------------------------------------------------- |
+| `default`     | The main action in an area. One per area.                 |
+| `outline`     | Secondary actions next to a `default` button              |
+| `secondary`   | Less prominent actions, e.g. in toolbars                  |
+| `ghost`       | Low-emphasis actions, e.g. in table rows or menus         |
+| `destructive` | Deleting, or actions that can't be undone. Confirm first. |
+| `link`        | An action that should look like text                      |
+
+## When to use
+
+- For **actions**. To go to another page, use a link. If it must look like a button, style a plain link with `buttonVariants`, so it is still announced as a link:
+
+  ```tsx
+  import { buttonVariants } from "@/components/ui/button";
+
+  <a href="/units" className={buttonVariants({ variant: "outline" })}>
+    View units
+  </a>;
+  ```
+
+  Don't use `<Button render={<a href="…" />}>` for navigation: Base UI gives the result `role="button"`, so screen readers announce a button.
+
+- **One `default` button per area**, so the main action is obvious.
+- **Labels say what happens**: "Save changes", "Export CSV". Avoid "OK" or "Click here".
+
+## When not to use
+
+- For navigation between pages. Use a link.
+- For toggling a setting on and off. Use **Switch** or **Toggle**.
+- For a choice between options. Use **Radio Group**, **Select** or **Toggle Group**.
+
+## Accessibility
+
+- Works with **Tab**, **Enter** and **Space**.
+- The focus ring is drawn at full strength (a change from shadcn's 50% ring), so it meets WCAG 1.4.11 contrast of 3:1.
+- **Icon-only buttons need an `aria-label`**, and ideally a **Tooltip** with the same text.
+- Decorative icons inside a labelled button get `aria-hidden="true"`.
+- **Disabled** buttons can't be focused. If users need to know why an action is unavailable, explain it in nearby text instead of relying on the disabled state.
+- While an action runs, disable the button and change its label ("Saving…"), so screen-reader users hear the change.
+
+## Related
+
+- **Toggle**: a button that stays pressed.
+- **Dropdown Menu**: a button that opens a list of actions.
+- **Tooltip**: names icon-only buttons.
+
+<Stories />

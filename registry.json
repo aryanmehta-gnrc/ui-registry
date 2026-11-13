@@ -4,70 +4,113 @@
   "homepage": "https://github.com/aryanmehta-gnrc/ui-registry",
   "items": [
     {
+      "name": "theme-dse",
+      "type": "registry:theme",
+      "title": "DSE",
+      "cssVars": {
+        "light": {
+          "primary": "#8fa646",
+          "primary-foreground": "#1d2600",
+          "ring": "#71862a",
+          "…": "…"
+        },
+        "dark": {
+          "primary": "#a7be64",
+          "primary-foreground": "#1d2600",
+          "ring": "#a7be64",
+          "…": "…"
+        }
+      }
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
+      "description": "Triggers an action, such as saving, submitting or opening a dialog.",
       "dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
-      "files": [{ "path": "src/components/ui/button.tsx", "type": "registry:ui" }]
-    },
-    {
-      "name": "card",
-      "type": "registry:ui",
-      "title": "Card",
-      "dependencies": ["cn"],
-      "files": [{ "path": "src/components/ui/card.tsx", "type": "registry:ui" }]
-    },
-    {
-      "name": "input",
-      "type": "registry:ui",
-      "title": "Input",
-      "dependencies": ["@base-ui/react", "cn"],
-      "files": [{ "path": "src/components/ui/input.tsx", "type": "registry:ui" }]
+      "meta": { "interactive": true },
+      "files": [{ "path": "registry/ui/button.tsx", "type": "registry:ui" }]
     },
     {
       "name": "label",
       "type": "registry:ui",
-      "title": "Label",
+      "title": "label",
       "dependencies": ["cn"],
-      "files": [{ "path": "src/components/ui/label.tsx", "type": "registry:ui" }]
+      "files": [{ "path": "registry/ui/label.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "input",
+      "dependencies": ["@base-ui/react", "cn"],
+      "files": [{ "path": "registry/ui/input.tsx", "type": "registry:ui" }]
     },
     {
       "name": "separator",
       "type": "registry:ui",
-      "title": "Separator",
+      "title": "separator",
       "dependencies": ["@base-ui/react", "cn"],
-      "files": [{ "path": "src/components/ui/separator.tsx", "type": "registry:ui" }]
+      "files": [{ "path": "registry/ui/separator.tsx", "type": "registry:ui" }]
     },
     {
       "name": "field",
       "type": "registry:ui",
-      "title": "Field",
+      "title": "field",
       "dependencies": ["class-variance-authority", "cn"],
-      "registryDependencies": [
-        "aryanmehta-gnrc/ui-registry/label",
-        "aryanmehta-gnrc/ui-registry/separator"
-      ],
-      "files": [{ "path": "src/components/ui/field.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "registry/ui/field.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/separator.tsx", "type": "registry:ui" }
+      ]
     },
     {
-      "name": "dseid-auth-card",
-      "type": "registry:block",
-      "title": "DSEiD Auth Card",
-      "description": "DSEiD Auth Card for Auth0.",
+      "name": "card",
+      "type": "registry:ui",
+      "title": "card",
       "dependencies": ["cn"],
-      "registryDependencies": [
-        "aryanmehta-gnrc/ui-registry/button",
-        "aryanmehta-gnrc/ui-registry/card",
-        "aryanmehta-gnrc/ui-registry/field",
-        "aryanmehta-gnrc/ui-registry/input"
-      ],
-      "files": [
-        {
-          "path": "src/components/blocks/auth/dseid-auth-card.tsx",
-          "type": "registry:component",
-          "target": "@components/auth/dseid-auth-card.tsx"
-        }
-      ]
+      "files": [{ "path": "registry/ui/card.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "badge",
+      "dependencies": ["@base-ui", "class-variance-authority", "cn"],
+      "files": [{ "path": "registry/ui/badge.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "tooltip",
+      "dependencies": ["@base-ui/react", "cn"],
+      "files": [{ "path": "registry/ui/tooltip.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "skeleton",
+      "dependencies": ["cn"],
+      "files": [{ "path": "registry/ui/skeleton.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "avatar",
+      "dependencies": ["@base-ui/react", "cn"],
+      "files": [{ "path": "registry/ui/avatar.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "kbd",
+      "dependencies": ["cn"],
+      "files": [{ "path": "registry/ui/kbd.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "spinner",
+      "dependencies": ["cn", "lucide-react"],
+      "files": [{ "path": "registry/ui/spinner.tsx", "type": "registry:ui" }]
     }
   ]
 }
