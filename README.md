@@ -1,87 +1,62 @@
-# ui-registry
+# DSE UI registry
 
-A [shadcn registry](https://ui.shadcn.com/docs/registry) of React components built on Base UI and Tailwind CSS v4. The shadcn CLI copies a component's source into your project.
+React components for DSE web applications, built on [Base UI](https://base-ui.com) and Tailwind CSS v4 and installed with the [shadcn CLI](https://ui.shadcn.com/docs/registry).
 
-> **Status:** experimental.
+> **Status: experimental.** This is a test registry. Components, names and docs may change without notice.
 
-## Using a component
+## Use a component
 
-**Requirements**
+Requirements: React 19, Tailwind CSS v4, Node.js 22.18+, and shadcn initialised with `npx shadcn@latest init -b base`.
 
-- A React project with Tailwind CSS v4 and shadcn initialised (`npx shadcn@latest init -b base`).
-- Read access to this repository.
-- Node.js 26 (see `.nvmrc`). Minimum 22.18.
+The repository is private, so sign in first with **one** of:
 
-**1. Sign in.** This repository is private. Use either of these:
+```bash
+gh auth login
+# or a fine-grained token with Contents: Read-only on this repo
+export GH_TOKEN=github_pat_xxxxxxxx
+```
 
-- **A token:** create a fine-grained token with access to this repository only and **Contents: Read-only**, then:
-  ```bash
-  export GH_TOKEN=github_pat_xxxxxxxx
-  ```
-- **The GitHub CLI:**
-  ```bash
-  gh auth login
-  ```
-
-**2. Install a component:**
+Then add a component:
 
 ```bash
 npx shadcn@latest add aryanmehta-gnrc/ui-registry/button
 ```
 
-**3. Pin a version** (optional):
+The CLI copies the source into your project, so it doesn't update itself. The full guides (installing, updating and Next.js) are in Storybook under **Getting Started**.
+
+Never commit a token or paste it into an issue or chat.
+
+## Documentation
+
+| For              | Where                                                                |
+| ---------------- | -------------------------------------------------------------------- |
+| Using components | Storybook: run `npm run storybook` (hosted version to follow)        |
+| What's planned   | [COMPONENTS.md](COMPONENTS.md)                                       |
+| What changed     | [CHANGELOG.md](CHANGELOG.md)                                         |
+| Contributing     | [CONTRIBUTING.md](CONTRIBUTING.md) and [contributing/](contributing) |
+
+## Develop
+
+Use the Node version in `.nvmrc` (`nvm use`), then:
 
 ```bash
-npx shadcn@latest add aryanmehta-gnrc/ui-registry/button#v0.1.0
+npm ci
+npm run storybook        # docs and stories at http://localhost:6006
+npm run check            # lint, types, registry validation and checks
+npx playwright test      # accessibility sweep and end-to-end tests
 ```
 
-**Updating:** installed components are copies, so they don't update themselves. Re-run `add` with `--diff` to compare with your copy, or with `--overwrite` to replace it (local edits are lost).
+## Repository layout
 
-## Symfony
-
-Components run as React islands inside Twig pages, using [Symfony UX React](https://symfony.com/bundles/ux-react) and a Node build such as [Symfony Reprise](https://symfony.com/bundles/reprise/current/index.html).
-
-- Create `components.json` by hand (shadcn has no Symfony template), with `"rsc": false` and aliases pointing at `assets/react/`.
-- Wrap each component in a default-export controller in `assets/react/controllers/`, then mount it from Twig:
-  ```twig
-  <div {{ react_component('SaveButton', { label: 'Save' }) }}></div>
-  ```
-- Each island is a separate React app and can't share providers with other islands.
-
-## Developing
-
-```bash
-npm install
-npm run dev                  # builds the registry and starts Vite
-npm run storybook            # http://localhost:6006
-npm run registry:validate    # checks registry.json
 ```
-
-### Adding a component
-
-1. Add the file to `src/components/ui/`, starting from shadcn's version if there is one: `npx shadcn@latest add <component>`.
-2. Put `"use client"` on the first line if the component is interactive.
-3. Add a story next to it (`<component>.stories.tsx`).
-4. Add an entry to `registry.json`:
-   ```json
-   {
-     "name": "button",
-     "type": "registry:ui",
-     "dependencies": ["@base-ui/react", "class-variance-authority"],
-     "registryDependencies": ["utils"],
-     "files": [
-       { "path": "src/components/ui/button.tsx", "type": "registry:ui" }
-     ]
-   }
-   ```
-
-   - **`dependencies`:** list every npm package the file imports.
-   - **`registryDependencies`:** refer to this registry's own items in full, e.g. `aryanmehta-gnrc/ui-registry/input`.
-5. Run `npm run registry:validate`, then push. Tag releases as `vX.Y.Z`.
-
-### Rules for components
-
-- One component per file, with named exports only.
-- Import only from npm packages, `@/lib/utils` and `@/components/ui/*`.
-- Use theme tokens (`bg-primary`, `border-input`), never hard-coded colours.
-- No framework-specific imports (`next/link` and similar) and no fonts.
+registry/
+  ui/            components: <name>.tsx, <name>.stories.tsx, <name>.mdx (flat, no subfolders)
+  lib/           shared helpers
+  hooks/         shared hooks
+  index.css      theme tokens
+docs/            Storybook pages (.mdx) for people using the components
+contributing/    guides for people building the components
+tests/           Playwright: accessibility sweep, e2e tests, fixtures
+scripts/         check-registry.ts
+registry.json    the list of installable items
+```

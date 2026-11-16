@@ -1,0 +1,15 @@
+<style>
+  /* Docs pages: 16px body text (Storybook's default is 14px).
+     Story previews are excluded so components render at their own size. */
+  #storybook-docs
+    .sbdocs-content
+    :is(p, li, td, th, blockquote):not(.docs-story *, .sb-unstyled *) {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Inline code: slightly smaller than the text around it */
+  #storybook-docs .sbdocs-content :is(p, li, td, th) > code:not(.docs-story *) {
+    font-size: 0.875em;
+  }
+</style>

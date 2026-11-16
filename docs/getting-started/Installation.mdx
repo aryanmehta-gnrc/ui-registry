@@ -16,7 +16,7 @@ Add components to a React project with the shadcn CLI. The CLI copies each compo
 npx shadcn@latest init -b base
 ```
 
-When asked, choose your framework template (Vite or Next.js). For Symfony, see **Symfony projects** below.
+When asked, choose your framework template (Vite or Next.js).
 
 ## 2. Sign in to GitHub
 
@@ -76,21 +76,6 @@ A pin applies only to the component you name. Components it depends on are insta
 
 - Interactive components start with `"use client"`. The CLI keeps it when `components.json` has `"rsc": true`.
 - Don't pass ordinary functions (such as `onClick`) from a Server Component. Wrap the component in your own Client Component, or use a link or a Server Action.
-
-## Symfony projects
-
-Components run as **React islands** inside Twig pages, mounted with [Symfony UX React](https://symfony.com/bundles/ux-react).
-
-1. Set up a Node build (Symfony Reprise, or your existing Vite or Webpack Encore setup), React, TypeScript and Tailwind CSS v4.
-2. Create `components.json` by hand (shadcn has no Symfony template), with `"rsc": false` and aliases pointing at `assets/react/`.
-3. Add components with the command above.
-4. Wrap each one in a controller with a **default export** in `assets/react/controllers/`, then mount it from Twig:
-
-```twig
-<div {{ react_component('SaveButton', { label: 'Save' }) }}></div>
-```
-
-Each island is a separate React app: islands can't share React context, and props from Twig must be plain data.
 
 ## Troubleshooting
 

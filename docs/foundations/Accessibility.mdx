@@ -133,53 +133,7 @@ If your project uses its own theme, check these pairs still pass with your colou
 
 ## How it's tested
 
-<table>
-  <thead>
-    <tr>
-      <th>Check</th>
-      <th>When it runs</th>
-      <th>What it catches</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <strong>Storybook Accessibility panel</strong>
-      </td>
-      <td>Live, while developing</td>
-      <td>axe-core checks on the open story</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Story tests</strong>
-      </td>
-      <td>
-        Storybook test panel, <code>npm run test:stories</code>
-      </td>
-      <td>The same checks; set to fail on any violation</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Accessibility sweep</strong>
-      </td>
-      <td>
-        <code>npm run test:a11y</code>, and in CI
-      </td>
-      <td>axe-core on every story of every component</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Keyboard tests</strong>
-      </td>
-      <td>
-        <code>npm run test:e2e</code>, and in CI
-      </td>
-      <td>
-        Tab order, keyboard activation, focus management, accessible names
-      </td>
-    </tr>
-  </tbody>
-</table>
+Every story of every component is checked automatically with axe-core, both while developing (the **Accessibility** panel) and in CI. Interactive components also have keyboard tests covering Tab order, activation, focus management and accessible names. Contributors: see [contributing/testing.md](https://github.com/aryanmehta-gnrc/ui-registry/blob/main/contributing/testing.md).
 
 Automated tools find roughly a third of accessibility problems. The rest needs people:
 

@@ -12,37 +12,31 @@ const preview: Preview = {
 
     /* Sidebar ----------------------------------------------------------- */
     // Top-level groups come from the first part of each story's title
-    // ("Forms/Input" → Forms). Nested arrays order pages inside a group.
-    // Must stay inline: Storybook reads it without running this file.
+    // ("Components/Forms/Input" → Components). Nested arrays order pages
+    // inside a group. Must stay inline: Storybook reads it without running
+    // this file.
     options: {
       storySort: {
         order: [
-          // Docs pages (docs/)
           "Introduction",
           "Getting Started",
           ["Installation", "Updating"],
           "Foundations",
           ["Typography", "Spacing", "Icons", "Accessibility", "Colours"],
-
-          // For contributors
-          "Engineering",
-
-          "Patterns",
-
-          // Components (registry/ui/)
-          "Actions",
-          "Forms",
-          "Data Display",
-          "Feedback",
-          "Overlays",
-          "Navigation",
-          "Layout",
-          "Charts",
-
-          // Composed pieces and full screens
+          "Components",
+          [
+            "Actions",
+            "Forms",
+            "Data Display",
+            "Feedback",
+            "Overlays",
+            "Navigation",
+            "Layout",
+            "Charts",
+          ],
           "Blocks",
+          "Patterns",
           "Pages",
-
           "*",
         ],
       },
